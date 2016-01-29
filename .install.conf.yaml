@@ -1,0 +1,48 @@
+- clean: ['~', '~/.config']
+
+- link:
+    #    ~/.dotfiles: ''
+    ~/.gitconfig: 
+      path: gitconfig
+      force: true
+      relink: true
+    ~/.zshrc: 
+      path: zshrc
+      force: true
+      relink: true
+    ~/.zsh: 'zsh'
+    ~/.gitignore_global: 
+      path: gitignore_global
+      force: true
+      relink: true
+    ~/.vimrc:
+      path: vimrc
+      force: true
+      relink: true
+    ~/.gnupg/gpg.conf:
+      path: gpg.conf
+      create: true
+      force: true
+      relink: true
+    ~/.screenrc: 
+      path: screenrc
+      create: true
+      force: true
+      relink: true
+#  ~/.agignore: agignore
+#  ~/.axelrc: axelrc
+#  ~/.hgrc: hgrc
+#  ~/.inputrc: inputrc
+#  ~/.sbt/0.13/build.sbt:
+#    create: true
+#    path: sbt/0.13/build.sbt
+#  ~/.sbt/0.13/plugins/plugins.sbt:
+#    create: true
+#    path: sbt/0.13/plugins/plugins.sbt
+#  ~/.tmux.conf: tmux.conf
+#  ~/.vim: vim/
+#  ~/.zsh: zsh/
+                                                                                                                                                                                                                                                                                                        
+- shell:
+    - curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    - git update-submodules # after linking ~/.gitconfig'
