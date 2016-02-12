@@ -9,7 +9,7 @@ fi
 
 # Check if $BOOKMARKS_FILE is a symlink.
 if [[ -L $BOOKMARKS_FILE ]]; then
-  BOOKMARKS_FILE=$(readlink $BOOKMARKS_FILE)
+  BOOKMARKS_FILE=${BOOKMARKS_FILE:A}
 fi
 
 # Create bookmarks_file it if it doesn't exist
@@ -66,7 +66,7 @@ function _add_bookmark(){
     if [ $# = 1 ]; then
         echo "$1 | $(pwd)" >> $BOOKMARKS_FILE
     else
-        echo "$1 | $(realpath $2)" >> $BOOKMARKS_FILE
+        echo "$1 | ${2:A}" >> $BOOKMARKS_FILE
     fi
     _load_bookmarks
 }
