@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 ### USEFUL USER FUNCTIONS ###
 
 
