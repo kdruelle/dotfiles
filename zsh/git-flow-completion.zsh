@@ -239,7 +239,7 @@ __git-flow-feature ()
 
                 (track)
                     _arguments \
-                        ':feature:__git_flow_feature_list'\
+                        ':feature:__git_flow_remote_feature_list'\
                 ;;
 
                 (diff)
@@ -290,6 +290,17 @@ __git_flow_feature_list ()
     declare -a features
 
     features=(${${(f)"$(_call_program features git flow feature list 2> /dev/null | tr -d ' |*')"}})
+    __git_command_successful || return
+
+    _wanted features expl 'feature' compadd $features
+}
+
+__git_flow_remote_feature_list ()
+{
+    local expl
+    declare -a features
+
+    features=(${${(f)"$(_call_program rfeatures git branch -r | grep -E "feature/[-A-Za-z0-9]+" | sed -r 's#\s*origin/feature/([-A-Za-z0-9]+).*#\1#g' 2> /dev/null)"}})
     __git_command_successful || return
 
     _wanted features expl 'feature' compadd $features
