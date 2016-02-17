@@ -33,12 +33,14 @@ function _load_bookmarks(){
 function _list_bookmarks_details(){
     old_IFS=$IFS      # save the field separator
     IFS=$'\n'         # new field separator, the end of line
+    tab=""
     for line in $(cat $BOOKMARKS_FILE)
     do
         local markname=$(echo "$line" | cut -d "|" -f 1 | xargs)
         local markpath=$(echo "$line" | cut -d "|" -f 2 | xargs)
-        echo "${markname} => ${markpath}"
+        tab="$tab$(echo "${markname} => ${markpath}")\n"
     done
+    echo $tab | column -t
     IFS=$old_IFS
 }
 
