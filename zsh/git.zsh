@@ -30,7 +30,8 @@ function gitinfo()
             changed="$(git --git-dir=$d/.git --work-tree=$d diff --shortstat | grep -Eo '([0-9]+) files? changed.' | grep -Eo '[0-9]+')"
             added="$(git --git-dir=$d/.git --work-tree=$d diff --shortstat | grep -Eo '([0-9]+) insertion' | grep -Eo '[0-9]+')"
             deleted="$(git --git-dir=$d/.git --work-tree=$d diff --shortstat | grep -Eo '([0-9]+) deletion' | grep -Eo '[0-9]+')"
-            printf "%-40s: \x1b[38;5;%dm%s\x1b[0m%s (%.6s) \x1b[33m%3d\x1b[0m, \x1b[32m%3d\x1b[0m, \x1b[31m%3d\x1b[0m\n" "$(basename $d)" "$h" "$branch" "$(cat /dev/zero | head -c $(( 15 - $#branch )) | tr '\0' ' ')" "$(git --git-dir=$d/.git rev-parse HEAD)" "$changed" "$added" "$deleted";
+#            printf "%-40s: \x1b[38;5;%dm%s\x1b[0m%s (%.6s) \x1b[33m%3d\x1b[0m, \x1b[32m%3d\x1b[0m, \x1b[31m%3d\x1b[0m\n" "$(basename $d)" "$h" "$branch" "$(cat /dev/zero | head -c $(( 15 - $#branch )) | tr '\0' ' ')" "$(git --git-dir=$d/.git rev-parse HEAD)" "$changed" "$added" "$deleted";
+            printf "%-40s: \x1b[38;5;%dm%-30s\x1b[0m%s (%.6s) \x1b[33m%3d\x1b[0m, \x1b[32m%3d\x1b[0m, \x1b[31m%3d\x1b[0m\n" "$(basename $d)" "$h" "$branch" " " "$(git --git-dir=$d/.git rev-parse HEAD)" "$changed" "$added" "$deleted"
         fi
     done;
 }
