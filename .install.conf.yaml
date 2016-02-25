@@ -29,6 +29,11 @@
       create: true
       force: true
       relink: true
+    ~/.config/terminator/config:
+      path: terminator.conf
+      create: true
+      force: true
+      relink: true
 #  ~/.agignore: agignore
 #  ~/.axelrc: axelrc
 #  ~/.hgrc: hgrc
