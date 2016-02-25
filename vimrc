@@ -1,4 +1,5 @@
 "
+"
 "  .vimrc -- my personal VIM configuration
 "            see https://github.com/Falkor/dotfiles
 "
@@ -31,7 +32,6 @@ try
     Plug 'https://github.com/ctrlpvim/ctrlp.vim'
     Plug 'https://github.com/scrooloose/syntastic'
     Plug 'https://github.com/morhetz/gruvbox'
-    Plug 'https://github.com/mtglsk/mushroom'
     Plug 'https://github.com/scrooloose/nerdtree'
     Plug 'https://github.com/bling/vim-airline'
     Plug 'https://github.com/luochen1990/rainbow'
@@ -45,13 +45,16 @@ try
     Plug 'https://github.com/godlygeek/tabular'
     Plug 'https://github.com/majutsushi/tagbar'
     Plug 'https://github.com/vim-scripts/mru.vim'
+    Plug 'https://github.com/gilgigilgil/anderson.vim'
+    Plug 'https://github.com/chriskempson/base16-vim'
+    Plug 'https://github.com/antlypls/vim-colors-codeschool'
     call plug#end()
 catch
 endtry
 
 
-
-set vb
+" Numéros de ligne
+set nu
 
 " Encoding
 set enc=utf-8
@@ -235,4 +238,13 @@ noremap <C-x><C-r>        :so $MYVIMRC<CR>
 
 noremap <C-x><S-s>  :w !sudo tee %<CR>L<CR>
 
+
+
+
+
+" highlight Normal ctermbg=darkblue
+" colorscheme gruvbox
+colorscheme base16-eighties
+set background=dark
+highlight LineNr ctermfg=darkgrey ctermbg=bg
 
