@@ -48,6 +48,9 @@ try
     Plug 'https://github.com/gilgigilgil/anderson.vim'
     Plug 'https://github.com/chriskempson/base16-vim'
     Plug 'https://github.com/antlypls/vim-colors-codeschool'
+    Plug 'https://github.com/w0ng/vim-hybrid'
+    Plug 'https://github.com/altercation/vim-colors-solarized'
+    Plug 'https://github.com/vim-scripts/Highlight-UnMatched-Brackets'
     call plug#end()
 catch
 endtry
