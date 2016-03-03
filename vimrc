@@ -64,6 +64,9 @@ set enc=utf-8
 
 " Tabs
 set tabstop=4 shiftwidth=4 expandtab
+
+set list listchars=tab:»·,trail:· ",eol:¶
+
 set pastetoggle=<F2>
 
 " Active la coloration syntaxique
@@ -247,7 +250,7 @@ noremap <C-x><S-s>  :w !sudo tee %<CR>L<CR>
 
 " highlight Normal ctermbg=darkblue
 " colorscheme gruvbox
-colorscheme base16-eighties
+colorscheme hybrid
 set background=dark
 highlight LineNr ctermfg=darkgrey ctermbg=bg
 
