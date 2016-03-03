@@ -40,6 +40,8 @@ _git-flow ()
                 'hotfix:Manage your hotfix branches.'
                 'support:Manage your support branches.'
                 'version:Shows version information.'
+                'config:Manage your git-flow configuration.'
+                'log:Show log deviating from base branch.'
             )
             _describe -t commands 'git flow' subcommands
         ;;
@@ -49,7 +51,13 @@ _git-flow ()
 
                 (init)
                     _arguments \
-                        -f'[Force setting of gitflow branches, even if already configured]'
+                        -f'[Force setting of gitflow branches, even if already configured]' \
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--delete','-d'}'[Use default branch naming conventions]' \
+                        --local'[utiliser le fichier de configuration du dépôt]' \
+                        --global'[utiliser les fichier de configuration global]' \
+                        --system'[utiliser le fichier de configuration du système]' \
+                        --file'[utiliser le fichier de configuration spécifié]:config file:_path_files'
                     ;;
 
                     (version)
@@ -101,27 +109,40 @@ __git-flow-release ()
 
                 (start)
                     _arguments \
-                        -F'[Fetch from origin before performing finish]'\
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--fetch','-F'}'[Fetch from origin before performing finish]'\
+                        {'--verbose','-v'}'[Verbose (more) output]'
                         ':version:__git_flow_version_list'
                 ;;
 
                 (finish)
                     _arguments \
-                        -F'[Fetch from origin before performing finish]' \
-                        -s'[Sign the release tag cryptographically]'\
-                        -u'[Use the given GPG-key for the digital signature (implies -s)]'\
-                        -m'[Use the given tag message]'\
-                        -p'[Push to $ORIGIN after performing finish]'\
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--fetch','-F'}'[Fetch from origin before performing finish]'\
+                        {'--sign','-s'}'[Sign the release tag cryptographically]'\
+                        {'--signingkey','-u'}'[Use the given GPG-key for the digital signature (implies -s)]'\
+                        {'--message','-m'}'[Use the given tag message]'\
+                        {'--mesagefile','-f'}'[...]:message file:_path_files' \
+                        {'--push','-p'}'[Push to $ORIGIN after performing finish]' \
+                        {'--keep','-k'}'[Keep branch after performing finish]' \
+                        --keepremote'[Keep the remote branch]' \
+                        --keeplocal'[Keep the local branch]' \
+                        {'--force_delete','-d'}'[Force delete release branch after finish]' \
+                        {'--notag','-n'}"[Don't tag this release]" \
+                        {'--nobackmerge','-b'}"[Don't back-merge master, or tag if applicable, in develop]" \
+                        {'--squash','-S'}'[Squash release during merge]' \
                         ':version:__git_flow_version_list'
                 ;;
 
                 (publish)
                     _arguments \
+                        --showcommands'[Show git commands while executing them]' \
                         ':version:__git_flow_version_list'
                 ;;
 
                 (track)
                     _arguments \
+                        --showcommands'[Show git commands while executing them]' \
                         ':version:__git_flow_version_list'
                 ;;
 
@@ -162,18 +183,27 @@ __git-flow-hotfix ()
 
                 (start)
                     _arguments \
-                        -F'[Fetch from origin before performing finish]'\
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--fetch','-F'}'[Fetch from origin before performing finish]'\
                         ':hotfix:__git_flow_version_list'\
                         ':branch-name:__git_branch_names'
                 ;;
 
                 (finish)
                     _arguments \
-                        -F'[Fetch from origin before performing finish]' \
-                        -s'[Sign the release tag cryptographically]'\
-                        -u'[Use the given GPG-key for the digital signature (implies -s)]'\
-                        -m'[Use the given tag message]'\
-                        -p'[Push to $ORIGIN after performing finish]'\
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--fetch','-F'}'[Fetch from origin before performing finish]'\
+                        {'--sign','-s'}'[Sign the release tag cryptographically]'\
+                        {'--signingkey','-u'}'[Use the given GPG-key for the digital signature (implies -s)]'\
+                        {'--message','-m'}'[Use the given tag message]'\
+                        {'--mesagefile','-f'}'[...]:message file:_path_files' \
+                        {'--push','-p'}'[Push to $ORIGIN after performing finish]' \
+                        {'--keep','-k'}'[Keep branch after performing finish]' \
+                        --keepremote'[Keep the remote branch]' \
+                        --keeplocal'[Keep the local branch]' \
+                        {'--force_delete','-d'}'[Force delete release branch after finish]' \
+                        {'--notag','-n'}"[Don't tag this release]" \
+                        {'--nobackmerge','-b'}"[Don't back-merge master, or tag if applicable, in develop]" \
                         ':hotfix:__git_flow_hotfix_list'
                 ;;
 
@@ -209,6 +239,7 @@ __git-flow-feature ()
                 'rebase:Rebase from integration branch.'
                 'checkout:Checkout local feature branch.'
                 'pull:Pull changes from remote.'
+                'delete:Delete a feature branch.'
             )
             _describe -t commands 'git flow feature' subcommands
             _arguments \
@@ -220,46 +251,62 @@ __git-flow-feature ()
 
                 (start)
                     _arguments \
-                        -F'[Fetch from origin before performing finish]'\
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--fetch','-F'}'[Fetch from origin before performing finish]'\
                         ':feature:__git_flow_feature_list'\
                         ':branch-name:__git_branch_names'
                 ;;
 
                 (finish)
                     _arguments \
-                        -F'[Fetch from origin before performing finish]' \
-                        -r'[Rebase instead of merge]'\
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--fetch','-F'}'[Fetch from origin before performing finish]'\
+                        {'--rebase','-r'}'[Rebase before merging]' \
+                        {'--preserve-merges','-p'}'[Preserve merges while rebasing]' \
+                        {'--keep','-k'}'[Keep branch after performing finish]' \
+                        --keepremote'[Keep the remote branch]' \
+                        --keeplocal'[Keep the local branch]' \
+                        {'--force_delete','-D'}'[Force delete feature branch after finish]' \
+                        {'--squash','-S'}'[Squash feature during merge]' \
+                        --no-ff'[Never fast-forward during the merge]' \
                         ':feature:__git_flow_feature_list'
                 ;;
 
                 (publish)
                     _arguments \
+                        --showcommands'[Show git commands while executing them]' \
                         ':feature:__git_flow_feature_list'\
                 ;;
 
                 (track)
                     _arguments \
+                        --showcommands'[Show git commands while executing them]' \
                         ':feature:__git_flow_remote_feature_list'\
                 ;;
 
                 (diff)
                     _arguments \
+                        --showcommands'[Show git commands while executing them]' \
                         ':branch:__git_branch_names'\
                 ;;
 
                 (rebase)
                     _arguments \
-                        -i'[Do an interactive rebase]' \
+                        --showcommands'[Show git commands while executing them]' \
+                        {'--interactive','-i'}'[Do an interactive rebase]' \
+                        {'--preserve-merges','-p'}'[Preserve merges]' \
                         ':branch:__git_branch_names'
                 ;;
 
                 (checkout)
                     _arguments \
+                        --showcommands'[Show git commands while executing them]' \
                         ':branch:__git_flow_feature_list'\
                 ;;
 
                 (pull)
                     _arguments \
+                        --showcommands'[Show git commands while executing them]' \
                         ':remote:__git_remotes'\
                         ':branch:__git_branch_names'
                 ;;
