@@ -1,12 +1,275 @@
 
 if [ ! $(echo "$0" | grep -s "zsh") ]; then
-	echo "error: Not in zsh" 1>&2
-	return;
+    echo "error: Not in zsh" 1>&2
+    return;
 fi
 
 source $HOME/.zsh-antigen/antigen.zsh
 
 
-antigen bundle $HOME/.zsh/
+
+EDITOR="vim"
+VISUAL="vim"
+PAGER="less"
+
+UPDATE_TERM_TITLE="x" # set to update the term title according to the path and the currently executed line
+
+OS="$(uname | tr "A-Z" "a-z")"    # get the os name
+case "$OS" in
+    (*darwin*)                    # Mac os
+        LS_COLORS='exfxcxdxbxexexabagacad';;
+    (*cygwin*)                    # cygwin
+        LS_COLORS='fi=1;32:di=1;34:ln=35:so=32:pi=0;33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=1;34:ow=1;34:';;
+    (*linux*|*)                    # Linux
+        LS_COLORS='fi=1;34:di=1;34:ln=35:so=32:pi=0;33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=1;34:ow=1;34:';;
+esac
+
+
+
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle kdruelle/zsh plugins/zsh_utils
+antigen bundle kdruelle/zsh plugins/prompt
+antigen bundle kdruelle/zsh plugins/completion
+antigen bundle kdruelle/zsh plugins/bookmarks
+antigen bundle kdruelle/zsh plugins/backupfiles
+antigen bundle kdruelle/zsh plugins/history
+antigen bundle kdruelle/zsh compdef/git_flow
+antigen bundle supercrabtree/k
+antigen bundle horosgrisa/mysql-colorize
+antigen bundle robbyrussell/oh-my-zsh plugins/debian
+antigen bundle robbyrussell/oh-my-zsh plugins/golang
+antigen bundle robbyrussell/oh-my-zsh plugins/screen
+
+antigen apply
+
+
+typeset -Ug PATH                # do not accept doubles
+
+
+
+case "$OS" in
+    (*darwin*)                    # Mac os
+        alias update="brew update && brew upgrade";
+        alias install="brew install ";
+        alias ls="ls -G";;
+    (*cygwin*)                    # cygwin
+        alias ls="ls --color=auto";
+        alias install="apt-cyg install ";;
+    (*linux*|*)                    # Linux
+        alias update="sudo apt-get update && sudo apt-get upgrade";
+        alias install="apt-get install ";
+        alias ls="ls --color=auto";;
+esac
+
+alias ll="ls -lFh"
+alias l="ll"
+alias la="ls -lAFh"                # l with hidden files
+alias lt="ls -ltFh"                # l with modification date sort
+alias l1="ls -1"                # one result per line
+
+alias count="wc -l"
+alias e="$EDITOR"
+alias py="python"
+alias ressource="source ~/.zshrc"
+alias res="ressource"
+
+
+alias mkdir="mkdir -pv"            # create all the needed parent directories + inform user about creations
+
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+installed tree && alias tree="tree -C"           # -C colorzzz
+installed colordiff && alias diff="colordiff" # diff with nicer colors
+installed rsync && alias cpr="rsync -a --stats --progress" # faster
+alias less="less -RS"            # -R Raw control chars, -S to truncate the long lines instead of folding them
+
+
+alias size="du -sh"                                # get the size of smthing
+alias fatfiles="du -a . | sort -nr | head -n10" # get the 10 biggest files
+alias df="df -Tha --total"        # disk usage infos
+alias fps="ps | head -n1  && ps aux | grep -v grep | grep -i -e 'USER.*PID.*%CPU.*%MEM.*VSZ.*RSS TTY.*STAT.*START.*TIME COMMAND.*' -e " # fps <processname> to get ps infos only for the matching processes
+alias tt="tail --retry -fn0"    # real time tail a log
+alias dzsh="zsh --norcs --xtrace" # debugzsh
+
+alias trunc='sed "s/^\(.\{0,$COLUMNS\}\).*$/\1/g"' # truncate too long lines
+
+
+
+# C-v or 'cat -v' to get the keycode
+bindkey -s "^[e" "^Uerror\n"              # run error user function
+
+#########################################################################################################################
+#### ZSH FUNCTIONS BINDS ###
+
+
+
+
+
+
+
+
+
+
+
+#### USEFUL VARS ###
+#
+#CLICOLOR=1
+#
+#
+#DEF_C="$(tput sgr0)"
+#
+#C_BLACK="$(tput setaf 0)"
+#C_RED="$(tput setaf 1)"
+#C_GREEN="$(tput setaf 2)"
+#C_YELLOW="$(tput setaf 3)"
+#C_BLUE="$(tput setaf 4)"
+#C_PURPLE="$(tput setaf 5)"
+#C_CYAN="$(tput setaf 6)"
+#C_WHITE="$(tput setaf 7)"
+#C_GREY="$(tput setaf 8)"
+#
+#    
+#### (UN)SETTING ZSH (COOL) OPTIONS ###
+#
+#setopt prompt_subst                # compute PS1 at each prompt print
+#setopt auto_remove_slash        # remove slash when pressing space in auto completion
+#setopt null_glob                # remove pointless globs
+#setopt auto_cd                    # './dir' = 'cd dir'
+#setopt auto_push_d                    # './dir' = 'cd dir'
+#setopt c_bases                    # c-like bases conversions
+#setopt c_precedences            # c-like operators
+#setopt emacs                    # enable emacs like keybindigs
+#setopt flow_control                # enable C-q and C-s to control the flooow
+#setopt complete_in_word            # complete from anywhere
+#setopt clobber                    # i aint no pussy
+#setopt extended_glob            # used in matching im some functions
+#setopt multi_os                    # no more tee !
+#
+#unsetopt beep                    # no disturbing sounds
+#
+#
+#PS4="%N:%i> ";
+#function setps4 ()                # toggle PS4 (xtrace prompt) between verbose and default
+#{
+#    case "$PS4" in
+#        ("%b%N:%I %_
+#%B")
+#            PS4="%N:%i> ";
+#            ;;
+#        (*)
+#            PS4="%b%N:%I %_
+#%B";
+#    esac 
+#}
+#
+#
+#### ZSH FUNCTIONS LOAD ###
+#
+#autoload add-zsh-hook            # control the hooks (chpwd, precmd, ...)
+#autoload zed                    # zsh editor
+#autoload zargs                    # xargs like in shell
+#
+## autoload predict-on            # fish like suggestion (with bundled lags !)
+## predict-on
+#
+#autoload -z edit-command-line    # edit command line with $EDITOR
+#zle -N edit-command-line
+#
+#autoload -U colors && colors    # cool colors
+#
+#
+#
+#### SHELL COMMANDS BINDS ###
+#
+## C-v or 'cat -v' to get the keycode
+#bindkey -s "^[j" "^A^Kjoin_others_shells\n" # join_others_shells user function
+#bindkey -s "^[r" "^Uressource\n"          # source ~/.zshrc
+#bindkey -s "^[e" "^Uerror\n"              # run error user function
+#bindkey -s "^[s" "^Asudo ^E"    # insert sudo
+#bindkey -s "^[g" "^A^Kgit commit -m\"\""
+#bindkey -s "^[c" "^A^Kgit checkout         "
+#bindkey -s "\el" "^Uls\n"        # run ls
+#bindkey -s "\ed" "^Upwd\n"        # run pwd
+#
+#
+#
+#### ZLE FUNCTIONS ###
+#
+#function get_terminfo_name()    # get the terminfo name according to the keycode
+#{
+#    for k in "${(@k)terminfo}"; do
+#        [ "$terminfo[$k]" = "$@" ] && echo $k
+#    done
+#}
+#
+#
+#
+#
+#
+#
+#function save-line()            # save the current line at its state in ~/.saved_commands
+#{
+#    echo $BUFFER >> ~/.saved_commands
+#}; zle -N save-line
+#
+#
+#function clear-and-accept()        # clear the screen and accepts the line
+#{
+#    zle clear-screen;
+#    [ $#BUFFER -ne 0 ] && zle accept-line;
+#}; zle -N clear-and-accept
+#
+#function move-text-right()        # shift text after cursor to the right
+#{
+#    BUFFER="${BUFFER:0:$CURSOR} ${BUFFER:$CURSOR}";
+#    CURSOR+=1;
+#}; zle -N move-text-right
+#
+#function move-text-left()        # shift text after cursor to the left
+#{
+#    if [ $CURSOR -ne 0 ]; then
+#        BUFFER="${BUFFER:0:$((CURSOR-1))}${BUFFER:$CURSOR}";
+#        CURSOR+=-1;
+#    fi
+#}; zle -N move-text-left
+#
+#
+#
+#function get-word-at-point()
+#{
+#    echo "${LBUFFER/* /}${RBUFFER/ */}";
+#}; zle -N get-word-at-point
+#
+#
+#function self-insert-hook() # hook after each non-binded key pressed
+#{
+#    
+#}; zle -N self-insert-hook
+#
+#function self-insert()            # call pre hook, insert key, and cal post hook
+#{
+#    zle .self-insert;
+#    zle self-insert-hook;
+#}; zle -N self-insert
+#
+#function show-kill-ring()
+#{
+#    local kr;
+#    kr="=> $CUTBUFFER";
+#    for k in $killring; do
+#        kr+=", $k"
+#    done
+#    zle -M "$kr";
+#}; zle -N show-kill-ring
+#
+#
+#
+#### USEFUL ALIASES ###
+#
+#[ -e ~/.postzshrc ] && source ~/.postzshrc # load user file if any
+#
+## join_others_shells                # ask to join others shells
+#
+#[ "$STARTUP_CMD" != "" ] && eval $STARTUP_CMD && unset STARTUP_CMD; # execute user defined commands after init
 
 
