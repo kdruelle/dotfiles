@@ -33,6 +33,7 @@ antigen bundle kdruelle/zsh plugins/completion
 antigen bundle kdruelle/zsh plugins/bookmarks
 antigen bundle kdruelle/zsh plugins/backupfiles
 antigen bundle kdruelle/zsh plugins/history
+antigen bundle kdruelle/zsh plugins/git
 antigen bundle kdruelle/zsh compdef/git_flow
 antigen bundle supercrabtree/k
 antigen bundle horosgrisa/mysql-colorize
