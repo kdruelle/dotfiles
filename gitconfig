@@ -15,6 +15,7 @@
     di = diff
     dis = diff --stat
     diw = diff --color-words
+    sdi = diff --staged
     dc = diff --cached
     dcs = diff --cached --stat
     dcw = diff --cached --color-words
@@ -51,8 +52,9 @@
     root = rev-parse --show-toplevel
     ctags = ! "ctg( { trap \"rm -f .git/tags.$$\" EXIT; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git; mv .git/tags.$$ .git/tags; }; ctg"
     tar = ! "tar( { git archive --format tar --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; tar"
-    targz = ! "targz( { git archive --format tar.gz --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; targz"
+    targz = ! "targz() { git archive --format tar.gz --prefix=\"${PWD##*/}/\" HEAD -o $(git remote show origin -n | grep URL | head -1 | sed 's/.*\\///' | sed 's/\\.git//').tar.gz; }; targz"
     zip = ! "zip( { git archive --format zip --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; zip"
+    release = ! "_(){git archive --format tar.gz --prefix=\"${PWD##*/}/\" HEAD -o $(git remote show origin -n | grep URL | head -1 | sed 's/.*\\///' | sed 's/\\.git//').tar.gz;}; _"
 
 [diff]
     mnemonicPrefix = true
