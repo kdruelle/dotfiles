@@ -29,32 +29,120 @@
 
 try
     call plug#begin('~/.vim/plugged')
-    Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-    Plug 'https://github.com/scrooloose/syntastic'
-    Plug 'https://github.com/morhetz/gruvbox'
+
+    " IDE
     Plug 'https://github.com/scrooloose/nerdtree'
+    "Plug 'https://github.com/jistr/vim-nerdtree-tabs'
+    Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
+    Plug 'https://github.com/octol/vim-cpp-enhanced-highlight'
+    Plug 'https://github.com/scrooloose/syntastic'
+    Plug 'https://github.com/mbbill/undotree'
+
+    " GIT
     Plug 'https://github.com/bling/vim-airline'
+    Plug 'https://github.com/tpope/vim-fugitive'
+    Plug 'https://github.com/airblade/vim-gitgutter'
+
+    " colorscheme
+    Plug 'https://github.com/chriskempson/base16-vim'
+    Plug 'https://github.com/morhetz/gruvbox'
+    Plug 'https://github.com/antlypls/vim-colors-codeschool'
+    Plug 'https://github.com/altercation/vim-colors-solarized'
+    Plug 'https://github.com/w0ng/vim-hybrid'
+
+    " Misc
+    Plug 'https://github.com/matze/vim-move'
+    Plug 'https://github.com/kana/vim-textobj-user'
+    Plug 'https://github.com/rhysd/vim-textobj-anyblock'
+    Plug 'https://github.com/ctrlpvim/ctrlp.vim'                             " Search plugin
+    Plug 'https://github.com/kshenoy/vim-signature'
+    Plug 'https://github.com/jeetsukumaran/vim-buffergator'
+
     Plug 'https://github.com/luochen1990/rainbow'
     Plug 'https://github.com/itchyny/vim-cursorword'
-    Plug 'https://github.com/octol/vim-cpp-enhanced-highlight'
     Plug 'https://github.com/will133/vim-dirdiff'
     Plug 'https://github.com/vim-scripts/a.vim'
-    Plug 'https://github.com/tpope/vim-fugitive'
-    Plug 'https://github.com/mbbill/undotree'
     Plug 'https://github.com/vim-scripts/vim-pad'
     Plug 'https://github.com/godlygeek/tabular'
     Plug 'https://github.com/majutsushi/tagbar'
     Plug 'https://github.com/vim-scripts/mru.vim'
     Plug 'https://github.com/gilgigilgil/anderson.vim'
-    Plug 'https://github.com/chriskempson/base16-vim'
-    Plug 'https://github.com/antlypls/vim-colors-codeschool'
-    Plug 'https://github.com/w0ng/vim-hybrid'
-    Plug 'https://github.com/altercation/vim-colors-solarized'
     Plug 'https://github.com/vim-scripts/Highlight-UnMatched-Brackets'
+    Plug 'https://github.com/vim-scripts/Tail-Bundle'
+
     call plug#end()
 catch
 endtry
 
+
+
+
+set hidden
+set title
+
+" :au BufAdd,BufNewFile * nested tab sball
+autocmd TabEnter * silent! lcd %:p:h
+
+
+" Main
+
+" IDE
+
+"Nerdtree
+noremap <C-g>                :NERDTreeToggle<CR>
+let g:NERDTreeIndicatorMapCustom = {
+        \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+
+" Undotree
+noremap <C-u>                          :UndotreeToggle<CR>
+let g:undotree_SetFocusWhenToggle      = 1
+let g:undotree_WindowLayout            = 4
+"let g:undotree_SplitWidth              = 5
+set undodir=/tmp/undodir/
+set undofile
+
+" Highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+
+
+
+" Git
+
+" Airline
+let g:airline#extensions#branche#enabled = 1
+let g:airline#extensions#hunks#enabled = 1
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = '%{getcwd()}:h:t'
+
+
+
+" MISC
+
+" Move
+let g:move_key_modifier = 'C'
+
+" Buffergator
+noremap <C-b>                          :BuffergatorToggle<CR>
+let g:buffergator_autoupdate = 0
+let g:buffergator_display_regime = "filepath"
+let g:buffergator_autodismiss_on_select = 1
+let g:buffergator_suppress_keymaps = 0
+let g:buffergator_viewport_split_policy = "B"
+
+
+noremap <C-l>                            :CtrlPBuffer<CR>
 
 " Numéros de ligne
 set nu
@@ -174,9 +262,8 @@ noremap <C-Up>              <C-w><Up>
 noremap <C-Down>            <C-w><Down>
 noremap <C-Left>            <C-w><Left>
 noremap <C-Right>           <C-w><Right>
-noremap <S-Tab>             :tabprevious<CR>
-noremap <Tab>               :tabnext<CR>
-
+noremap <Tab>            :tabprevious<CR>
+noremap <S-Tab>           :tabnext<CR>
 
 nnoremap t <C-]>
 nnoremap <S-t> <C-t>
@@ -213,8 +300,6 @@ noremap <Space><Space>        :tabedit ~/.vimrc<CR>
 noremap <S-e>                b
 noremap <Space><Space>        :tabedit ~/.vimrc<CR>
 
-noremap <C-g>                :NERDTreeToggle<CR>
-noremap <C-b>                :UndotreeToggle<CR>:UndotreeFocus<CR>
 noremap <S-z>                :set fdm=syntax<CR>zR
 nnoremap <space>            :nohlsearch<CR>
 
@@ -233,8 +318,8 @@ inoremap <C-l>    <Right>
 "cnoremap <C-j>    <Down>
 "cnoremap <C-k>    <Up>
 
-inoremap <C-u>                <Esc><C-r>
-noremap <C-u>                <C-r>
+" inoremap <C-u>                <Esc><C-r>
+" noremap <C-u>                <C-r>
 
 inoremap <C-s>        <Esc>:w<CR><insert><Right>
 noremap <silent>            <C-s>    :w<CR>
