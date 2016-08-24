@@ -37,6 +37,7 @@ try
     Plug 'https://github.com/octol/vim-cpp-enhanced-highlight'
     Plug 'https://github.com/scrooloose/syntastic'
     Plug 'https://github.com/mbbill/undotree'
+    Plug 'https://github.com/aperezdc/vim-template.git'
 
     " GIT
     Plug 'https://github.com/bling/vim-airline'
@@ -115,7 +116,9 @@ set undofile
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 
-
+" vim.template
+let g:templates_global_name_prefix = "template_"
+let g:templates_directory = [ '~/.vim/templates' ]
 
 " Git
 

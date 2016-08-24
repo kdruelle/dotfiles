@@ -19,6 +19,7 @@
       path: vimrc
       force: true
       relink: true
+    ~/.vim/templates: 'vim/templates'
     ~/.gnupg/gpg.conf:
       path: gpg.conf
       create: true
