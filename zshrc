@@ -37,7 +37,7 @@ antigen bundle kdruelle/zsh plugins/git
 antigen bundle kdruelle/zsh compdef/git_flow
 antigen bundle supercrabtree/k
 antigen bundle horosgrisa/mysql-colorize
-antigen bundle robbyrussell/oh-my-zsh plugins/debian
+#antigen bundle robbyrussell/oh-my-zsh plugins/debian
 antigen bundle robbyrussell/oh-my-zsh plugins/golang
 antigen bundle robbyrussell/oh-my-zsh plugins/screen
 
