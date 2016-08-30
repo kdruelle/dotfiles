@@ -18,8 +18,8 @@ if [ ! -e $HOME/.gitconfig-user ]; then
     read -p "git user: " git_user
     read -p "git email: " git_mail
     echo "[user]" > $HOME/.gitconfig-user
-    echo "\tname = $git_user" >> $HOME/.gitconfig-user
-    echo "\temail = $git_mail" >> $HOME/.gitconfig-user
+    echo "name = $git_user" >> $HOME/.gitconfig-user
+    echo "email = $git_mail" >> $HOME/.gitconfig-user
 fi
 
 
