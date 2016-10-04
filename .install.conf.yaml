@@ -1,7 +1,11 @@
+- defaults:
+    link:
+      relink: true
+
 - clean: ['~', '~/.config']
 
 - link:
-    #~/.dotfiles: ''
+    ~/.dotfiles: ''
     ~/.zshrc: 
       path: zshrc
       force: true
