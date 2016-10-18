@@ -31,6 +31,7 @@ antigen bundle kdruelle/zsh plugins/zsh_utils
 antigen bundle kdruelle/zsh plugins/prompt
 antigen bundle kdruelle/zsh plugins/completion
 antigen bundle kdruelle/zsh plugins/bookmarks
+antigen bundle kdruelle/zsh plugins/encfs_bookmarks
 antigen bundle kdruelle/zsh plugins/backupfiles
 antigen bundle kdruelle/zsh plugins/history
 antigen bundle kdruelle/zsh plugins/vime
