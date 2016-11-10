@@ -10,7 +10,7 @@
       path: zshrc
       force: true
       relink: true
-    ~/.zsh-antigen: 'antigen'
+    ~/.zgen: 'zgen'
     ~/.gitconfig: 
       path: gitconfig
       force: true

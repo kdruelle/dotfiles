@@ -1,10 +1,13 @@
-
 #if [ ! $(echo "$0" | grep -s "zsh") ]; then
 #    echo "error: Not in zsh" 1>&2
 #    return;
 #fi
 
-source $HOME/.zsh-antigen/antigen.zsh
+#source $HOME/.zsh-antigen/antigen.zsh
+#source $HOME/.zplug/init.zsh
+autoload -U compaudit compinit
+compinit
+source ${HOME}/.zgen/zgen.zsh
 
 
 
@@ -24,26 +27,39 @@ case "$OS" in
         LS_COLORS='fi=1;34:di=1;34:ln=35:so=32:pi=0;33:ex=32:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=1;34:ow=1;34:';;
 esac
 
+if ! zgen saved; then
+
+    zgen load jhawthorn/fzy
+    zgen load kdruelle/zsh plugins/zsh_utils
+    zgen load kdruelle/zsh plugins/completion
+    zgen load zsh-users/zsh-autosuggestions
+    zgen load psprint/history-search-multi-word
+    zgen load peterhurford/up.zsh
+
+    zgen load kdruelle/zsh plugins/prompt
+
+    zgen load kdruelle/zsh plugins/bookmarks
+    zgen load kdruelle/zsh plugins/encfs_bookmarks
+
+    zgen load kdruelle/zsh plugins/backupfiles
+    zgen load kdruelle/zsh plugins/history
+    zgen load kdruelle/zsh plugins/vime
+
+    zgen load robbyrussell/oh-my-zsh plugins/golang
+    zgen load robbyrussell/oh-my-zsh plugins/screen
+    zgen load robbyrussell/oh-my-zsh plugins/git
 
 
-antigen bundle unixorn/autoupdate-antigen.zshplugin
-antigen bundle kdruelle/zsh plugins/zsh_utils
-antigen bundle kdruelle/zsh plugins/prompt
-antigen bundle kdruelle/zsh plugins/completion
-antigen bundle kdruelle/zsh plugins/bookmarks
-antigen bundle kdruelle/zsh plugins/encfs_bookmarks
-antigen bundle kdruelle/zsh plugins/backupfiles
-antigen bundle kdruelle/zsh plugins/history
-antigen bundle kdruelle/zsh plugins/vime
-antigen bundle kdruelle/zsh plugins/git
-antigen bundle kdruelle/zsh compdef/git_flow
-antigen bundle supercrabtree/k
-antigen bundle horosgrisa/mysql-colorize
-#antigen bundle robbyrussell/oh-my-zsh plugins/debian
-antigen bundle robbyrussell/oh-my-zsh plugins/golang
-antigen bundle robbyrussell/oh-my-zsh plugins/screen
+    zgen load kdruelle/zsh plugins/git
+    zgen load kdruelle/zsh compdef/git_flow
+    zgen load Seinh/git-prune
+    zgen load smallhadroncollider/antigen-git-rebase
+    zgen load supercrabtree/k
+    zgen load horosgrisa/mysql-colorize
 
-antigen apply
+    zgen save
+
+fi
 
 
 typeset -Ug PATH                # do not accept doubles
@@ -100,6 +116,8 @@ alias trunc='sed "s/^\(.\{0,$COLUMNS\}\).*$/\1/g"' # truncate too long lines
 
 # C-v or 'cat -v' to get the keycode
 bindkey -s "^[e" "^Uerror\n"              # run error user function
+
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 
 #########################################################################################################################
 #### ZSH FUNCTIONS BINDS ###
@@ -276,3 +294,7 @@ bindkey -s "^[e" "^Uerror\n"              # run error user function
 #[ "$STARTUP_CMD" != "" ] && eval $STARTUP_CMD && unset STARTUP_CMD; # execute user defined commands after init
 
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/kevin/.sdkman"
+[[ -s "/home/kevin/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kevin/.sdkman/bin/sdkman-init.sh"
