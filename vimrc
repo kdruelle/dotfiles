@@ -27,131 +27,60 @@
 " Avertissement par flash (visual bell) plutôt que par beep
 
 
-try
-    call plug#begin('~/.vim/plugged')
-
-    " IDE
-    Plug 'https://github.com/scrooloose/nerdtree'
-    "Plug 'https://github.com/jistr/vim-nerdtree-tabs'
-    Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
-    Plug 'https://github.com/octol/vim-cpp-enhanced-highlight'
-    Plug 'https://github.com/scrooloose/syntastic'
-    Plug 'https://github.com/mbbill/undotree'
-    Plug 'https://github.com/aperezdc/vim-template.git'
-
-    " GIT
-    Plug 'https://github.com/bling/vim-airline'
-    Plug 'https://github.com/tpope/vim-fugitive'
-    Plug 'https://github.com/airblade/vim-gitgutter'
-
-    " colorscheme
-    Plug 'https://github.com/chriskempson/base16-vim'
-    Plug 'https://github.com/morhetz/gruvbox'
-    Plug 'https://github.com/antlypls/vim-colors-codeschool'
-    Plug 'https://github.com/altercation/vim-colors-solarized'
-    Plug 'https://github.com/w0ng/vim-hybrid'
-
-    " Misc
-    Plug 'https://github.com/matze/vim-move'
-    Plug 'https://github.com/kana/vim-textobj-user'
-    Plug 'https://github.com/rhysd/vim-textobj-anyblock'
-    Plug 'https://github.com/ctrlpvim/ctrlp.vim'                             " Search plugin
-    Plug 'https://github.com/kshenoy/vim-signature'
-    Plug 'https://github.com/jeetsukumaran/vim-buffergator'
-
-    Plug 'https://github.com/luochen1990/rainbow'
-    Plug 'https://github.com/itchyny/vim-cursorword'
-    Plug 'https://github.com/will133/vim-dirdiff'
-    Plug 'https://github.com/vim-scripts/a.vim'
-    Plug 'https://github.com/vim-scripts/vim-pad'
-    Plug 'https://github.com/godlygeek/tabular'
-    Plug 'https://github.com/majutsushi/tagbar'
-    Plug 'https://github.com/vim-scripts/mru.vim'
-    Plug 'https://github.com/gilgigilgil/anderson.vim'
-    Plug 'https://github.com/vim-scripts/Highlight-UnMatched-Brackets'
-    Plug 'https://github.com/vim-scripts/Tail-Bundle'
-
-    call plug#end()
-catch
-endtry
+source ~/.vim/sources/plugins.vim
+source ~/.vim/sources/nerdtree.vim
+source ~/.vim/sources/undotree.vim
+source ~/.vim/sources/highlight.vim
+source ~/.vim/sources/templates.vim
+source ~/.vim/sources/airline.vim
 
 
 
 
-set hidden
-set title
+set title               " Change the terminal Title
+set hidden              " Can edit multiple files without have to save current changes
+set nu                  " Display line numbers
+set enc=utf-8           " Encoding
+syntax on               " Active la coloration syntaxique
+set pastetoggle=<F2>    " Paste mode
 
 " :au BufAdd,BufNewFile * nested tab sball
 autocmd TabEnter * silent! lcd %:p:h
 
 
-" Main
 
-" IDE
-
-"Nerdtree
-noremap <C-g>                :NERDTreeToggle<CR>
-let g:NERDTreeIndicatorMapCustom = {"Modified"  : "✹", "Staged"    : "✚", "Untracked" : "✭", "Renamed"   : "➜", "Unmerged"  : "═", "Deleted"   : "✖", "Dirty"     : "✗", "Clean"     : "✔︎", "Unknown"   : "?"  }
-
-
-" Undotree
-noremap <C-u>                          :UndotreeToggle<CR>
-let g:undotree_SetFocusWhenToggle      = 1
-let g:undotree_WindowLayout            = 4
-"let g:undotree_SplitWidth              = 5
-set undodir=/tmp/undodir/
-set undofile
-
-" Highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-
-" vim.template
-let g:templates_global_name_prefix = "template_"
-let g:templates_directory = [ '~/.vim/templates' ]
-
-" Git
-
-" Airline
-let g:airline#extensions#branche#enabled = 1
-let g:airline#extensions#hunks#enabled = 1
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = '%{getcwd()}:h:t'
-
-
+"set tags+=~/.vim/tags/cpp_tags
+"map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q -I _GLIBCXX_NOEXCEPT .<CR>
+"
+"" OmniCppComplete
+"let OmniCpp_NamespaceSearch = 1
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+"let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+"" automatically open and close the popup menu / preview window
+"au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"set completeopt=menuone,menu,longest,preview
 
 " MISC
 
 " Move
 let g:move_key_modifier = 'C'
 
-" Buffergator
-noremap <C-b>                          :BuffergatorToggle<CR>
-let g:buffergator_autoupdate = 0
-let g:buffergator_display_regime = "filepath"
-let g:buffergator_autodismiss_on_select = 1
-let g:buffergator_suppress_keymaps = 0
-let g:buffergator_viewport_split_policy = "B"
+
+let g:gitgutter_max_signs = 2000
 
 
-noremap <C-l>                            :CtrlPBuffer<CR>
-
-" Numéros de ligne
-set nu
-
-" Encoding
-set enc=utf-8
 
 " Tabs
 set tabstop=4 shiftwidth=4 expandtab
 
 set list listchars=tab:»·,trail:· ",eol:¶
 
-set pastetoggle=<F2>
 
-" Active la coloration syntaxique
-syntax on
 " Utiliser le jeu de couleurs standard
 " colorscheme default
 colorscheme default
