@@ -40,6 +40,16 @@
       create: true
       force: true
       relink: true
+    ~/.i3/config:
+      path: i3/config
+      create: true
+      force: true
+      relink: true
+    ~/.config/i3status/config:
+      path: i3/i3status.conf
+      create: true
+      force: true
+      relink: true
 #  ~/.agignore: agignore
 #  ~/.axelrc: axelrc
 #  ~/.hgrc: hgrc
