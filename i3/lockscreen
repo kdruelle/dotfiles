@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# add to i3 config:
+# bindsym $mod+[lock_key] exec "[script_location]"
+# Dependencies:
+# imagemagick
+# i3lock
+
+IMAGE=/tmp/i3lock.png
+
+#lock icon
+ICON=$HOME/.i3/lock.png
+HUE=(-level 0%,100%,0.6)
+EFFECT=(-filter Gaussian -resize 20% -define filter:sigma=1.5 -resize 500.5%)
+FONT="Helvetica"
+TEXT="Entrez votre mot de passe"
+
+# Get the screenshot, add the blur and lock the screen with it
+xwd -root | convert - $IMAGE
+convert $IMAGE -scale "20%" -scale "500%" $IMAGE
+
+#if lock icona
+VALUE="60" #brightness value to compare to
+
+COLOR=$(convert "$IMAGE" -gravity center -crop 100x100+0+0 +repage -colorspace hsb \
+    -resize 1x1 txt:- | awk -F '[%$]' 'NR==2{gsub(",",""); printf "%.0f\n", $(NF-1)}');
+if [ "$COLOR" -gt "$VALUE" ]; then #white background image and black text
+    BW="black"
+    ICON="$HOME/.i3/lockdark.png"
+else #black
+    BW="white"
+    ICON="$HOME/.i3/lock.png"
+fi
+
+convert $IMAGE "${HUE[@]}" "${EFFECT[@]}" -font "$FONT" -pointsize 26 -fill "$BW" -gravity center -annotate +0+160 "$TEXT" "$ICON" -gravity center -composite "$IMAGE"
+
+i3lock -neti $IMAGE
+
+rm $IMAGE
+
+

@@ -50,6 +50,21 @@
       create: true
       force: true
       relink: true
+    ~/.i3/lockscreen:
+      path: i3/lockscreen
+      create: true
+      force: true
+      relink: true
+    ~/.i3/lock.png:
+      path: i3/lock.png
+      create: true
+      force: true
+      relink: true
+    ~/.i3/lockdark.png:
+      path: i3/lockdark.png
+      create: true
+      force: true
+      relink: true
 #  ~/.agignore: agignore
 #  ~/.axelrc: axelrc
 #  ~/.hgrc: hgrc
