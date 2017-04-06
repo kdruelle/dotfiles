@@ -35,6 +35,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-autosuggestions
     zgen load psprint/history-search-multi-word
     zgen load peterhurford/up.zsh
+    zgen load kdruelle/zsh plugins/ago
 
     zgen load kdruelle/zsh plugins/prompt
 
@@ -48,10 +49,12 @@ if ! zgen saved; then
     zgen load robbyrussell/oh-my-zsh plugins/golang
     zgen load robbyrussell/oh-my-zsh plugins/screen
     zgen load robbyrussell/oh-my-zsh plugins/git
+    zgen load sobolevn/git-secret
 
 
     zgen load kdruelle/zsh plugins/git
     zgen load kdruelle/zsh compdef/git_flow
+    zgen load unixorn/git-extra-commands.git
     zgen load Seinh/git-prune
     zgen load smallhadroncollider/antigen-git-rebase
     zgen load supercrabtree/k

@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
-
 set -e
 
-CONFIG=".install.conf.yaml"
-DOTBOT_DIR=".dotbot"
+UNAME=$(uname)
 
+case $UNAME in
+    Linux)
+        OS="linux"
+        ;;
+    Darwin)
+        OS="mac"
+        ;;
+    *)
+        echo "Unsupported OS, exiting"
+        exit
+        ;;
+esac
+
+
+CONFIG="$OS.install.conf.yaml"
+DOTBOT_DIR=".dotbot"
+echo $CONFIG
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

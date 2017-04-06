@@ -7,39 +7,46 @@
 - link:
     ~/.dotfiles: ''
     ~/.zshrc: 
-      path: zshrc
+      path: zsh/zshrc
       force: true
       relink: true
+
     ~/.zgen: 'zgen'
+
     ~/.gitconfig: 
-      path: gitconfig
+      path: git/gitconfig
       force: true
       relink: true
     ~/.gitignore_global: 
-      path: gitignore_global
+      path: git/gitignore_global
       force: true
       relink: true
+
     ~/.vimrc:
-      path: vimrc
+      path: vim/vimrc
       force: true
       relink: true
     ~/.vim/templates: 'vim/templates'
     ~/.vim/sources: 'vim/sources'
+
     ~/.gnupg/gpg.conf:
-      path: gpg.conf
+      path: gpg/gpg.conf
       create: true
       force: true
       relink: true
+
     ~/.screenrc: 
-      path: screenrc
+      path: screen/screenrc
       create: true
       force: true
       relink: true
+
     ~/.config/terminator/config:
-      path: terminator.conf
+      path: terminator/terminator.conf
       create: true
       force: true
       relink: true
+
     ~/.i3/config:
       path: i3/config
       create: true
@@ -65,6 +72,7 @@
       create: true
       force: true
       relink: true
+
 #  ~/.agignore: agignore
 #  ~/.axelrc: axelrc
 #  ~/.hgrc: hgrc

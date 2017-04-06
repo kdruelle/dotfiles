@@ -105,4 +105,9 @@
 [include]
     path = ~/.gitconfig_local
 
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+[url "gogs@git.druelle.info:"]
+    insteadOf = https://git.druelle.info/
 
