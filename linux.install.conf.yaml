@@ -62,6 +62,11 @@
       create: true
       force: true
       relink: true
+    ~/.i3/lockscreen-xkcd:
+      path: i3/lockscreen-xkcd
+      create: true
+      force: true
+      relink: true
     ~/.i3/lock.png:
       path: i3/lock.png
       create: true
@@ -69,6 +74,11 @@
       relink: true
     ~/.i3/lockdark.png:
       path: i3/lockdark.png
+      create: true
+      force: true
+      relink: true
+    ~/.i3/white.png:
+      path: i3/white.png
       create: true
       force: true
       relink: true

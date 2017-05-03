@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# add to i3 config:
+# bindsym $mod+[lock_key] exec "[script_location]"
+# Dependencies:
+# imagemagick
+# i3lock
+
+
+
+WHITE=$HOME/.i3/white.png
+IMAGE=/tmp/i3-lock.png
+ICON=/tmp/i3-random.png
+
+cp $WHITE $IMAGE
+curl $(curl -sL https://c.xkcd.com/random/comic/ | grep "https://imgs" | rev | cut -d\  -f1 | rev) > $ICON
+convert $IMAGE $ICON -gravity center -composite -matte $IMAGE
+
+i3lock -neti $IMAGE
+
+rm $IMAGE
+rm $ICON
+
+
+
+
