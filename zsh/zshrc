@@ -34,6 +34,7 @@ if ! zgen saved; then
     zgen load psprint/history-search-multi-word
     zgen load peterhurford/up.zsh
     zgen load kdruelle/zsh plugins/ago
+    zgen load kdruelle/zsh plugins/fasd
 
     zgen load kdruelle/zsh plugins/prompt
 
@@ -132,7 +133,6 @@ fuck () {
     test -n "$TF_CMD" && print -s $TF_CMD
 }
 
-eval "$(fasd --init auto)"
 
 #########################################################################################################################
 #### ZSH FUNCTIONS BINDS ###
