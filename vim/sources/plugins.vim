@@ -14,6 +14,7 @@ try
     Plug 'https://github.com/aperezdc/vim-template.git'
     
     Plug 'https://github.com/jeetsukumaran/vim-buffergator'
+    Plug 'https://github.com/Valloric/MatchTagAlways'
 
     Plug 'https://github.com/scrooloose/syntastic'
     "Plug 'https://github.com/dradtke/OmniCppComplete'

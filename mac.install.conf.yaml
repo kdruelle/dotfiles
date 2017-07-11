@@ -1,0 +1,52 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.dotfiles: ''
+    ~/.zshrc: 
+      path: zsh/zshrc
+      force: true
+      relink: true
+
+    ~/.zgen: 'zgen'
+
+    ~/.gitconfig: 
+      path: git/gitconfig
+      force: true
+      relink: true
+    ~/.gitignore_global: 
+      path: git/gitignore_global
+      force: true
+      relink: true
+
+    ~/.vimrc:
+      path: vim/vimrc
+      force: true
+      relink: true
+    ~/.vim/templates: 'vim/templates'
+    ~/.vim/sources: 'vim/sources'
+
+    ~/.gnupg/gpg.conf:
+      path: gpg/gpg.conf
+      create: true
+      force: true
+      relink: true
+
+    ~/.screenrc: 
+      path: screen/screenrc
+      create: true
+      force: true
+      relink: true
+
+- shell:
+    - curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    - git submodule update --init --recursive # after linking ~/.gitconfig'
+    - sudo pip install rainbowstream
+    - sudo pip3 install mycli
+    - sudo gem install terjira
+    - sudo pip3 install thefuck
+
+

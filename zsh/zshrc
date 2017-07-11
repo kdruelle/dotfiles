@@ -5,10 +5,8 @@
 
 #source $HOME/.zsh-antigen/antigen.zsh
 #source $HOME/.zplug/init.zsh
-autoload -U compaudit compinit
-compinit
+autoload -Uz compinit && compinit
 source ${HOME}/.zgen/zgen.zsh
-
 
 
 EDITOR="vim"
@@ -32,7 +30,7 @@ if ! zgen saved; then
     zgen load jhawthorn/fzy
     zgen load kdruelle/zsh plugins/zsh_utils
     zgen load kdruelle/zsh plugins/completion
-    zgen load zsh-users/zsh-autosuggestions
+    zgen load zsh-users/zsh-autosuggestions / v0.3.2
     zgen load psprint/history-search-multi-word
     zgen load peterhurford/up.zsh
     zgen load kdruelle/zsh plugins/ago
@@ -48,13 +46,12 @@ if ! zgen saved; then
 
     zgen load robbyrussell/oh-my-zsh plugins/golang
     zgen load robbyrussell/oh-my-zsh plugins/screen
-    zgen load robbyrussell/oh-my-zsh plugins/git
+    #zgen load robbyrussell/oh-my-zsh plugins/git
     zgen load sobolevn/git-secret
 
 
     zgen load kdruelle/zsh plugins/git
-    zgen load kdruelle/zsh compdef/git_flow
-    zgen load unixorn/git-extra-commands.git
+    #zgen load unixorn/git-extra-commands.git
     zgen load Seinh/git-prune
     zgen load smallhadroncollider/antigen-git-rebase
     zgen load supercrabtree/k
@@ -121,6 +118,21 @@ alias trunc='sed "s/^\(.\{0,$COLUMNS\}\).*$/\1/g"' # truncate too long lines
 bindkey -s "^[e" "^Uerror\n"              # run error user function
 
 export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+
+
+
+fuck () {
+    TF_PREVIOUS=$(fc -ln -1 | tail -n 1);
+    TF_CMD=$(
+    TF_ALIAS=fuck
+    TF_SHELL_ALIASES=$(alias)
+    PYTHONIOENCODING=utf-8
+    thefuck $TF_PREVIOUS THEFUCK_ARGUMENT_PLACEHOLDER $*
+    ) && eval $TF_CMD;
+    test -n "$TF_CMD" && print -s $TF_CMD
+}
+
+eval "$(fasd --init auto)"
 
 #########################################################################################################################
 #### ZSH FUNCTIONS BINDS ###

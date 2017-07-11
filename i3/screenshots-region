@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# add to i3 config:
+# bindsym $mod+[lock_key] exec "[script_location]"
+# Dependencies:
+# imagemagick
+# i3lock
+
+DESKTOP_PATH=$(xdg-user-dir DESKTOP)
+FILE_NAME="screenshot-$(date +"%Y%m%d-%H%M%S")-$RANDOM.png"
+
+scrot -s $DESKTOP_PATH/$FILE_NAME
+
+notify-send -t 10 "Screenshot $DESKTOP_PATH/$FILE_NAME"
+

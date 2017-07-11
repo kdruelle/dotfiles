@@ -118,6 +118,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 bindsym $mod+l exec "~/.i3/lockscreen-xkcd"
 
+bindsym --release $mod+Shift+s exec "~/.i3/screenshots-region"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode

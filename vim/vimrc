@@ -33,8 +33,9 @@ source ~/.vim/sources/undotree.vim
 source ~/.vim/sources/highlight.vim
 source ~/.vim/sources/templates.vim
 source ~/.vim/sources/airline.vim
+source ~/.vim/sources/buffergator.vim
 
-
+let g:mta_filetypes = {'html' : 1, 'xhtml' : 1, 'xml' : 1, 'jinja' : 1, 'ctp' : 1, 'php' : 1}
 
 
 set title               " Change the terminal Title
@@ -260,4 +261,23 @@ noremap <C-x><S-s>  :w !sudo tee %<CR>L<CR>
 colorscheme hybrid
 set background=dark
 highlight LineNr ctermfg=darkgrey ctermbg=bg
+
+
+
+
+
+noremap <C-x><C-b>        :call ToggleBinaryMode()<CR>''
+autocmd BufEnter * if !exists('b:isBinary') | let b:isBinary = 0 | endif
+function! ToggleBinaryMode()
+    if b:isBinary == 0
+        :%!xxd
+        let b:isBinary = 1
+    else
+        :%!xxd -r
+        let b:isBinary = 0
+    endif
+endfunction
+
+
+
 
