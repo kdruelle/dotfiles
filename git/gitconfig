@@ -62,6 +62,9 @@
     mnemonicPrefix = true
     wordRegex = "[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+"
 
+[diff "bin"]
+    textconv = hexdump -v -C
+
 [color]
     ui = auto
 
